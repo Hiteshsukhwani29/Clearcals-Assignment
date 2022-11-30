@@ -6,8 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hitesh.clearcalsassignment.R
+import com.hitesh.clearcalsassignment.paging.RecipePagingAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     companion object {
@@ -16,17 +21,30 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
 
+    private lateinit var adapter: RecipePagingAdapter
+
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
+        val v = inflater.inflate(R.layout.fragment_home, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        recyclerView = v.findViewById(R.id.rv_recipe)
+        adapter = RecipePagingAdapter()
+
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.hasFixedSize()
+        recyclerView.adapter = adapter
+
+        viewModel.list.observe(viewLifecycleOwner) {
+            adapter.submitData(lifecycle, it)
+        }
+
+        return v;
     }
 
 }
