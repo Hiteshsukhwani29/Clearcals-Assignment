@@ -17,19 +17,19 @@ import java.util.*
 class RecipePagingAdapter: PagingDataAdapter<Result, RecipePagingAdapter.RecipeViewHolder>(COMPARATOR) {
 
     class RecipeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val recipename = itemView.findViewById<TextView>(R.id.recipe_name)
-        val thumbnail = itemView.findViewById<ImageView>(R.id.thumbnail)
-        val createddate = itemView.findViewById<TextView>(R.id.created_date)
+        val recipeName: TextView = itemView.findViewById(R.id.recipe_name)
+        val recipeThumbnail: ImageView = itemView.findViewById(R.id.thumbnail)
+        val recipeCreatedDate: TextView = itemView.findViewById(R.id.created_date)
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
-            holder.recipename.text = item.name
+            holder.recipeName.text = item.name
             val date = Date(item.created_at)
             val format = SimpleDateFormat("dd-MM-yyyy", Locale.US)
-            holder.createddate.text = format.format(date)
-            Picasso.get().load(item.thumbnail_url).into(holder.thumbnail)
+            holder.recipeCreatedDate.text = format.format(date)
+            Picasso.get().load(item.thumbnail_url).into(holder.recipeThumbnail)
         }
     }
 

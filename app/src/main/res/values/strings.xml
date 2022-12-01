@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Clearcals Assignment</string>
+    <string name="account">account</string>
+    <string name="search">search</string>
+    <string name="filter">filter</string>
+    <string name="clearcals">Clearcals</string>
+    <string name="thumbnail">thumbnail</string>
 </resources>

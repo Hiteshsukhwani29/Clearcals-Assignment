@@ -2,6 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/kalam_bold</item>
+        <item>@font/lato_bold</item>
         <item>@font/roboto</item>
     </array>
 </resources>
