@@ -1,15 +1,17 @@
 package com.hitesh.clearcalsassignment.ui.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.paging.LoadState
-import androidx.paging.filter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -21,9 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
+    companion object;
 
     private lateinit var viewModel: HomeViewModel
 
@@ -33,16 +33,20 @@ class HomeFragment : Fragment() {
 
     private lateinit var mainProgressBar: LottieAnimationView
 
+    private lateinit var etSearch: EditText
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_home, container, false)
 
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel =
+            ViewModelProvider(this)[HomeViewModel::class.java]
 
         recyclerView = v.findViewById(R.id.rv_recipe)
         mainProgressBar = v.findViewById(R.id.main_progress_bar)
+        etSearch = v.findViewById(R.id.et_search)
         adapter = RecipePagingAdapter()
 
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -51,6 +55,18 @@ class HomeFragment : Fragment() {
             header = LoaderAdapter(),
             footer = LoaderAdapter()
         )
+
+        etSearch.setOnEditorActionListener { _, actionId, keyEvent ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
+                keyEvent == null ||
+                keyEvent.keyCode == KeyEvent.KEYCODE_ENTER
+            ) {
+                viewModel.getRecipes(etSearch.text.toString()).observe(viewLifecycleOwner) {
+                    adapter.submitData(lifecycle, it)
+                }
+            }
+            false
+        }
 
         adapter.addLoadStateListener {
             if (it.prepend is LoadState.NotLoading && it.prepend.endOfPaginationReached) {
@@ -61,11 +77,12 @@ class HomeFragment : Fragment() {
             }
         }
 
-        viewModel.list.observe(viewLifecycleOwner) {
+        viewModel.getRecipes("").observe(viewLifecycleOwner) {
+            Log.d("Observer", it.toString())
             adapter.submitData(lifecycle, it)
         }
 
-        return v;
+        return v
     }
 
 }

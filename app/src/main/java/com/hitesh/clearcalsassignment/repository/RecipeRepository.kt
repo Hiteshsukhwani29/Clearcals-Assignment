@@ -8,8 +8,8 @@ import com.hitesh.clearcalsassignment.retrofit.RecipeAPI
 import javax.inject.Inject
 
 class RecipeRepository @Inject constructor(private val recipeAPI: RecipeAPI) {
-    fun getRecipe() = Pager(
+    fun getRecipe(query: String?) = Pager(
         config = PagingConfig(pageSize = 10, maxSize = 50),
-        pagingSourceFactory = {RecipePagingSource(recipeAPI)}
+        pagingSourceFactory = {RecipePagingSource(recipeAPI, query)}
     ).liveData
 }

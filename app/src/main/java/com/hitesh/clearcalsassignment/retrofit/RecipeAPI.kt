@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface RecipeAPI {
 
     @GET("/recipes/list?rapidapi-key=${API_KEY}&size=10")
-    suspend fun getRecipes(@Query("from")page:Int): RecipeList
+    suspend fun getRecipes(@Query("from")page:Int, @Query("q")query: String?): RecipeList
 
 }
