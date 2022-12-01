@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.hitesh.clearcalsassignment.R
 
-class LoaderAdapter: LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
+class LoaderAdapter : LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
 
-    class LoaderViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    class LoaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val progressBar = itemView.findViewById<LottieAnimationView>(R.id.progress_bar)
-        fun bind(loadState: LoadState){
+        fun bind(loadState: LoadState) {
             progressBar.isVisible = loadState is LoadState.Loading
         }
     }
@@ -24,7 +24,7 @@ class LoaderAdapter: LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoaderViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_loading,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_loading, parent, false)
         return LoaderViewHolder(view)
     }
 }

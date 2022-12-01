@@ -10,6 +10,6 @@ import javax.inject.Inject
 class RecipeRepository @Inject constructor(private val recipeAPI: RecipeAPI) {
     fun getRecipe(query: String?) = Pager(
         config = PagingConfig(pageSize = 10, maxSize = 50),
-        pagingSourceFactory = {RecipePagingSource(recipeAPI, query)}
+        pagingSourceFactory = { RecipePagingSource(recipeAPI, query) }
     ).liveData
 }

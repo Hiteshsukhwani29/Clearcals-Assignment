@@ -15,13 +15,14 @@ import javax.inject.Singleton
 class NetworkModule {
     @Singleton
     @Provides
-    fun getRetrofit(): Retrofit{
-        return Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build()
+    fun getRetrofit(): Retrofit {
+        return Retrofit.Builder().baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
     @Singleton
     @Provides
-    fun getRecipeAPI(retrofit: Retrofit): RecipeAPI{
+    fun getRecipeAPI(retrofit: Retrofit): RecipeAPI {
         return retrofit.create(RecipeAPI::class.java)
     }
 }

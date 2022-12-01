@@ -14,9 +14,10 @@ import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RecipePagingAdapter: PagingDataAdapter<Result, RecipePagingAdapter.RecipeViewHolder>(COMPARATOR) {
+class RecipePagingAdapter :
+    PagingDataAdapter<Result, RecipePagingAdapter.RecipeViewHolder>(COMPARATOR) {
 
-    class RecipeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recipeName: TextView = itemView.findViewById(R.id.recipe_name)
         val recipeThumbnail: ImageView = itemView.findViewById(R.id.thumbnail)
         val recipeCreatedDate: TextView = itemView.findViewById(R.id.created_date)
