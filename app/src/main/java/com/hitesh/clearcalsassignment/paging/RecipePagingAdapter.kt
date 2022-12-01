@@ -3,23 +3,33 @@ package com.hitesh.clearcalsassignment.paging
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hitesh.clearcalsassignment.R
 import com.hitesh.clearcalsassignment.models.Result
+import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RecipePagingAdapter: PagingDataAdapter<Result, RecipePagingAdapter.RecipeViewHolder>(COMPARATOR) {
 
     class RecipeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val recipename = itemView.findViewById<TextView>(R.id.recipe_name)
+        val thumbnail = itemView.findViewById<ImageView>(R.id.thumbnail)
+        val createddate = itemView.findViewById<TextView>(R.id.created_date)
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
             holder.recipename.text = item.name
+            val date = Date(item.created_at)
+            val format = SimpleDateFormat("dd-MM-yyyy", Locale.US)
+            holder.createddate.text = format.format(date)
+            Picasso.get().load(item.thumbnail_url).into(holder.thumbnail)
         }
     }
 

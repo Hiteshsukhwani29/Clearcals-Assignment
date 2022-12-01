@@ -19,8 +19,8 @@ class RecipePagingSource(private val recipeAPI: RecipeAPI): PagingSource<Int, Re
             val response = recipeAPI.getRecipes(position)
             LoadResult.Page(
                 data = response.results,
-                prevKey = if (position==1) null else position - 20,
-                nextKey = if (position==response.count+20) null else position + 20
+                prevKey = if (position==1) null else position - 10,
+                nextKey = if (position==response.count+10) null else position + 10
             )
         } catch (e: Exception){
             LoadResult.Error(e)

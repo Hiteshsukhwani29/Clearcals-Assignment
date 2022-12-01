@@ -1,7 +1,7 @@
 package com.hitesh.clearcalsassignment.models
 
 data class Result(
-    val created_at: Int,
+    val created_at: Long,
     val description: String,
     val id: Int,
     val name: String,

@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class RecipeRepository @Inject constructor(private val recipeAPI: RecipeAPI) {
     fun getRecipe() = Pager(
-        config = PagingConfig(pageSize = 20, maxSize = 100),
+        config = PagingConfig(pageSize = 10, maxSize = 50),
         pagingSourceFactory = {RecipePagingSource(recipeAPI)}
     ).liveData
 }

@@ -8,6 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(val recipeRepository: RecipeRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(recipeRepository: RecipeRepository) : ViewModel() {
     val list = recipeRepository.getRecipe().cachedIn(viewModelScope)
 }
