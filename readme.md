@@ -1,5 +1,5 @@
 <h1 align="center">
-  <span><h3>Clearcals Assignment</h3></span>
+  <span><h3>Cuisine</h3></span>
     <p align="center">
     <a href="https://developer.android.com/studio"><img src="https://img.shields.io/badge/Built%20With-Android%20Studio-green?style=for-the-badge" alt="Android Studio"/></a>
     <a href="https://developer.android.com/studio"><img src="https://img.shields.io/badge/Launguages-Kotlin-blue?style=for-the-badge" alt="Kotlin"/></a>
